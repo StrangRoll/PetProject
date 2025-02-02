@@ -6,15 +6,22 @@ namespace CodeBase.Infrastructure.StateMachine
     public class BootstrapState : IState
     {
         private readonly GameStateMachine _stateMachine;
+        private SceneLoader _sceneLoader;
 
-        public BootstrapState(GameStateMachine stateMachine)
+        public BootstrapState(GameStateMachine stateMachine, SceneLoader sceneLoader)
         {
             _stateMachine = stateMachine;
+            _sceneLoader = sceneLoader;
         }
         
         public void Enter()
         {
             RegisterServices();
+            _sceneLoader.Load(SceneNames.InitScene, EnterLoadLevel);
+        }
+
+        private void EnterLoadLevel()
+        {
         }
 
         public void Exit()

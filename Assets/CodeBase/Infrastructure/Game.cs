@@ -7,10 +7,13 @@ namespace CodeBase.Infrastructure
     {
         public static IInputService InputService;
         public GameStateMachine StateMachine;
+        
+        private SceneLoader _sceneLoader;
 
-        public Game()
+        public Game(ICoroutineRunner coroutineRunner)
         {
-            StateMachine = new GameStateMachine();
+            _sceneLoader = new SceneLoader(coroutineRunner);
+            StateMachine = new GameStateMachine(_sceneLoader);
         }
     }
 }
