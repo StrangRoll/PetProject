@@ -19,7 +19,6 @@ public class HeroMove : MonoBehaviour
     private void Start()
     {
         _camera = Camera.main;
-        if (_camera != null) _camera.GetComponent<CameraFollow>().Follow(transform);
     }
     
     private void Update()
