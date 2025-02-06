@@ -1,4 +1,5 @@
 using CodeBase.Infrastructure.StateMachine;
+using CodeBase.Logic;
 using CodeBase.Services.Input;
 
 namespace CodeBase.Infrastructure
@@ -10,10 +11,10 @@ namespace CodeBase.Infrastructure
         
         private SceneLoader _sceneLoader;
 
-        public Game(ICoroutineRunner coroutineRunner)
+        public Game(ICoroutineRunner coroutineRunner, LoadingCurtain loadingCurtain)
         {
             _sceneLoader = new SceneLoader(coroutineRunner);
-            StateMachine = new GameStateMachine(_sceneLoader);
+            StateMachine = new GameStateMachine(_sceneLoader, loadingCurtain);
         }
     }
 }
