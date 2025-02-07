@@ -1,5 +1,6 @@
 using CodeBase;
 using CodeBase.Infrastructure;
+using CodeBase.Infrastructure.Services;
 using CodeBase.Services.Input;
 using UnityEngine;
 
@@ -13,7 +14,7 @@ public class HeroMove : MonoBehaviour
 
     private void Awake()
     {
-        _inputService = Game.InputService;
+        _inputService = AllServices.Container.Single<IInputService>();
     }
 
     private void Start()

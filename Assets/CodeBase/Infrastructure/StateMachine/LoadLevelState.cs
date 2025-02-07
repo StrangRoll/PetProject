@@ -1,3 +1,4 @@
+using CodeBase.Infrastructure.Factory;
 using CodeBase.Logic;
 using UnityEngine;
 
@@ -11,11 +12,12 @@ namespace CodeBase.Infrastructure.StateMachine
         private readonly IGameFactory _gameFactory;
 
         public LoadLevelState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, 
-            LoadingCurtain loadingCurtain)
+            LoadingCurtain loadingCurtain, IGameFactory gameFactory)
         {
             _gameStateMachine = gameStateMachine;
             _sceneLoader = sceneLoader;
             _loadingCurtain = loadingCurtain;
+            _gameFactory = gameFactory;
         }
 
         public void Enter(string sceneName)
