@@ -1,5 +1,3 @@
-using System;
-
 namespace CodeBase.Infrastructure.StateMachine
 {
     public class GameLoopState : IState

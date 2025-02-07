@@ -5,12 +5,10 @@ namespace CodeBase.Infrastructure.StateMachine
 {
     public class LoadLevelState : IPayloadedState<string>
     {
-        private const string HeroPath = "Hero/hero";
-        private const string HudPath = "Hud/Hud";
-        
         private readonly GameStateMachine _gameStateMachine;
         private readonly SceneLoader _sceneLoader;
         private readonly LoadingCurtain _loadingCurtain;
+        private readonly IGameFactory _gameFactory;
 
         public LoadLevelState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, 
             LoadingCurtain loadingCurtain)
@@ -30,25 +28,19 @@ namespace CodeBase.Infrastructure.StateMachine
         {
             var initialPoint = Object.FindObjectOfType<InitialPoint>();
             
-            var hero = InstantiatePrefab(HeroPath, initialPoint.transform.position);
-            InstantiatePrefab(HudPath);
+            var hero = _gameFactory.CreateHero(initialPoint);
+            _gameFactory.CreateHud();
             
             CameraFollow(hero.transform);  
 
             _gameStateMachine.Enter<GameLoopState>();
         }
-        
+
         private void CameraFollow(Transform hero)
         {
             Camera.main
                 .GetComponent<CameraFollow>()
                 .Follow(hero);
-        }
-        
-        private static GameObject InstantiatePrefab(string path, Vector3 at = default)
-        {
-            var prefab = Resources.Load<GameObject>(path);
-            return Object.Instantiate(prefab, at, Quaternion.identity); 
         }
 
         public void Exit()
