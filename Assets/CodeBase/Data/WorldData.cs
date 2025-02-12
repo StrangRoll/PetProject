@@ -7,17 +7,10 @@ namespace CodeBase.Data
     {
         public Vector3Data Position;
         public PositionOnLevel PositionOnLevel { get; set; }
-    }
 
-    public class PositionOnLevel
-    {
-        public string Level;
-        public Vector3Data Position;
-        
-        public PositionOnLevel(string level, Vector3Data position)
+        public WorldData(PositionOnLevel positionOnLevel)
         {
-            Level = level;
-            Position = position;
+            PositionOnLevel = positionOnLevel;
         }
     }
 }

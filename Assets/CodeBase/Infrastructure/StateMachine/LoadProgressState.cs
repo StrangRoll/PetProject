@@ -1,4 +1,3 @@
-using System;
 using CodeBase.Data;
 using CodeBase.Infrastructure.Services.PersistentProgress;
 using CodeBase.Infrastructure.Services.SaveLoad;
@@ -27,7 +26,7 @@ namespace CodeBase.Infrastructure.StateMachine
 
         public void Exit()
         {
-            throw new NotImplementedException();
+            
         }
 
         private void LoadProgressOrInitNew()

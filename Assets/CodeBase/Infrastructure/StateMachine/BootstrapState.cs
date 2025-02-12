@@ -31,7 +31,7 @@ namespace CodeBase.Infrastructure.StateMachine
 
         private void EnterLoadLevel()
         {
-            _stateMachine.Enter<LoadLevelState, string>(SceneNames.Level);
+            _stateMachine.Enter<LoadProgressState>();
         }
 
         public void Exit()

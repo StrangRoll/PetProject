@@ -1,17 +1,19 @@
 using CodeBase.Data;
+using UnityEngine;
 
 namespace CodeBase.Infrastructure.Services.SaveLoad
 {
     public class SaveLoadService : ISaveLoadService
     {
+        private const string ProgressKey = "Progress";
+
         public void SaveProgress()
         {
             throw new System.NotImplementedException();
         }
 
-        public PlayerProgress LoadProgress()
-        {
-            throw new System.NotImplementedException();
-        }
+        public PlayerProgress LoadProgress() =>
+            PlayerPrefs.GetString(ProgressKey)?
+                .ToDeserialized<PlayerProgress>(); 
     }
 }
