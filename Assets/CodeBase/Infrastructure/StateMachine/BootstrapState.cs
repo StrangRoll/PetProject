@@ -1,7 +1,9 @@
+using CodeBase.Data;
 using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.Infrastructure.Factory;
 using CodeBase.Infrastructure.Services;
 using CodeBase.Infrastructure.Services.PersistentProgress;
+using CodeBase.Infrastructure.Services.SaveLoad;
 using CodeBase.Services.Input;
 using UnityEngine;
 
@@ -43,6 +45,7 @@ namespace CodeBase.Infrastructure.StateMachine
             _allServices.RegisterSingle<IGameFactory>(
                 new GameFactory(_allServices.Single<IAssetProvider>()));
             _allServices.RegisterSingle<IPersistentProgressService>(new PersistentProgressService());
+            _allServices.RegisterSingle<SaveLoadService>(new SaveLoadService());
         }
 
         private IInputService InputService()

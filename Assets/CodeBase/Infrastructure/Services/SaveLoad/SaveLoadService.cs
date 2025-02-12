@@ -1,9 +1,17 @@
-using CodeBase.Infrastructure.Services;
+using CodeBase.Data;
 
-namespace CodeBase.Data
+namespace CodeBase.Infrastructure.Services.SaveLoad
 {
-    public class SaveLoadService : IService
+    public class SaveLoadService : ISaveLoadService
     {
-        
+        public void SaveProgress()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public PlayerProgress LoadProgress()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
