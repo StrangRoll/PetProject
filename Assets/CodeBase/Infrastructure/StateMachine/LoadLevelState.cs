@@ -23,6 +23,7 @@ namespace CodeBase.Infrastructure.StateMachine
         public void Enter(string sceneName)
         {
             _sceneLoader.Load(sceneName, OnLoaded);
+            _gameFactory.CleanUp();
             _loadingCurtain.Show();
         }
 
