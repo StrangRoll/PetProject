@@ -45,7 +45,8 @@ namespace CodeBase.Infrastructure.StateMachine
             _allServices.RegisterSingle<IGameFactory>(
                 new GameFactory(_allServices.Single<IAssetProvider>()));
             _allServices.RegisterSingle<IPersistentProgressService>(new PersistentProgressService());
-            _allServices.RegisterSingle<SaveLoadService>(new SaveLoadService());
+            _allServices.RegisterSingle<ISaveLoadService>(new SaveLoadService(_allServices.Single<IPersistentProgressService>(), 
+                _allServices.Single<IGameFactory>()));
         }
 
         private IInputService InputService()

@@ -6,6 +6,7 @@ using CodeBase.Infrastructure.Services;
 using CodeBase.Infrastructure.Services.PersistentProgress;
 using CodeBase.Infrastructure.Services.SaveLoad;
 using CodeBase.Logic;
+using UnityEngine;
 
 namespace CodeBase.Infrastructure.StateMachine
 {
@@ -19,9 +20,10 @@ namespace CodeBase.Infrastructure.StateMachine
             _state = new Dictionary<Type, IExitableState>()
             {
                 {typeof(BootstrapState), new BootstrapState(this, sceneLoader, services)},
-                {typeof(LoadLevelState), new LoadLevelState(this, sceneLoader, loadingCurtain, services.Single<IGameFactory>())},
+                {typeof(LoadLevelState), new LoadLevelState(this, sceneLoader, loadingCurtain, services.Single<IGameFactory>(), 
+                    services.Single<IPersistentProgressService>())},
                 {typeof(LoadProgressState), new LoadProgressState(this, 
-                    services.Single<IPersistentProgressService>(), services.Single<SaveLoadService>())},
+                    services.Single<IPersistentProgressService>(), services.Single<ISaveLoadService>())},
                 {typeof(GameLoopState), new GameLoopState()}
             };
         }

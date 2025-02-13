@@ -1,4 +1,5 @@
 using CodeBase.Infrastructure.Factory;
+using CodeBase.Infrastructure.Services.PersistentProgress;
 using CodeBase.Logic;
 using UnityEngine;
 
@@ -10,14 +11,16 @@ namespace CodeBase.Infrastructure.StateMachine
         private readonly SceneLoader _sceneLoader;
         private readonly LoadingCurtain _loadingCurtain;
         private readonly IGameFactory _gameFactory;
+        private readonly IPersistentProgressService _progressService;
 
         public LoadLevelState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, 
-            LoadingCurtain loadingCurtain, IGameFactory gameFactory)
+            LoadingCurtain loadingCurtain, IGameFactory gameFactory, IPersistentProgressService progressService)
         {
             _gameStateMachine = gameStateMachine;
             _sceneLoader = sceneLoader;
             _loadingCurtain = loadingCurtain;
             _gameFactory = gameFactory;
+            _progressService = progressService;
         }
 
         public void Enter(string sceneName)
@@ -29,14 +32,27 @@ namespace CodeBase.Infrastructure.StateMachine
 
         private void OnLoaded()
         {
+            InitGameWorld();
+            InformProgressReaders();
+
+            _gameStateMachine.Enter<GameLoopState>();
+        }
+
+        private void InformProgressReaders()
+        {
+            foreach (var progressReader in _gameFactory.ProgressReaders)
+            {
+                progressReader.LoadProgress(_progressService.Progress);
+            }
+        }
+
+        private void InitGameWorld()
+        {
             var initialPoint = Object.FindObjectOfType<InitialPoint>();
-            
             var hero = _gameFactory.CreateHero(initialPoint);
             _gameFactory.CreateHud();
             
-            CameraFollow(hero.transform);  
-
-            _gameStateMachine.Enter<GameLoopState>();
+            CameraFollow(hero.transform);
         }
 
         private void CameraFollow(Transform hero)

@@ -1,6 +1,7 @@
 using CodeBase.Data;
 using CodeBase.Infrastructure.Services.PersistentProgress;
 using CodeBase.Infrastructure.Services.SaveLoad;
+using UnityEngine;
 
 namespace CodeBase.Infrastructure.StateMachine
 {
@@ -11,7 +12,7 @@ namespace CodeBase.Infrastructure.StateMachine
         private readonly SaveLoadService saveLoadService;
         private readonly ISaveLoadService _saveLoadService;
 
-        public LoadProgressState(GameStateMachine gameStateMachine, IPersistentProgressService progressService, SaveLoadService saveLoadService)
+        public LoadProgressState(GameStateMachine gameStateMachine, IPersistentProgressService progressService, ISaveLoadService saveLoadService)
         {
             _gameStateMachine = gameStateMachine;
             _progressService = progressService;
