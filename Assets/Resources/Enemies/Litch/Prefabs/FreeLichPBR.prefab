@@ -398,6 +398,7 @@ GameObject:
   - component: {fileID: 7733949923621189381}
   - component: {fileID: 6660059070673311169}
   - component: {fileID: 6180155851103179223}
+  - component: {fileID: -81407211426572324}
   m_Layer: 0
   m_Name: FreeLichPBR
   m_TagString: Untagged
@@ -490,6 +491,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _agent: {fileID: 6660059070673311169}
+--- !u!114 &-81407211426572324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1500939411536426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3a6589cce9341ff889add805cb8eda2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _agent: {fileID: 6660059070673311169}
+  _animator: {fileID: 7733949923621189381}
 --- !u!1 &1537370055453520
 GameObject:
   m_ObjectHideFlags: 0
