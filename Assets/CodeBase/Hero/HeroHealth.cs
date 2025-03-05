@@ -11,11 +11,20 @@ namespace CodeBase.Hero
         [SerializeField] private HeroAnimator _animator;
         
         private State _state;
+        
+        public event Action<float, float> HealthChanged;
 
         public float Currrent
         {
             get => _state.CurrentHP;
-            set => _state.CurrentHP = value;
+            set
+            {
+                if (_state.CurrentHP == value)
+                    return;
+                
+                _state.CurrentHP = value;
+                HealthChanged?.Invoke(value, _state.MaxHP);
+            }
         }
 
         public float Max
@@ -27,6 +36,7 @@ namespace CodeBase.Hero
         public void LoadProgress(PlayerProgress progress)
         {
             _state = progress.HeroState;
+            HealthChanged?.Invoke(_state.CurrentHP, _state.MaxHP);
         }
 
         public void UpdateProgress(PlayerProgress progress)

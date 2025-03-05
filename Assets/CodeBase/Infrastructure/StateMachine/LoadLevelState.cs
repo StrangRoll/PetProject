@@ -1,6 +1,8 @@
+using CodeBase.Hero;
 using CodeBase.Infrastructure.Factory;
 using CodeBase.Infrastructure.Services.PersistentProgress;
 using CodeBase.Logic;
+using CodeBase.UI;
 using UnityEngine;
 
 namespace CodeBase.Infrastructure.StateMachine
@@ -38,6 +40,13 @@ namespace CodeBase.Infrastructure.StateMachine
             _gameStateMachine.Enter<GameLoopState>();
         }
 
+        private void InitHud(GameObject hero)
+        {
+            var hud = _gameFactory.CreateHud();
+            
+            hud.GetComponent<ActorUI>().Init(hero.GetComponent<HeroHealth>());
+        }
+
         private void InformProgressReaders()
         {
             foreach (var progressReader in _gameFactory.ProgressReaders)
@@ -50,7 +59,8 @@ namespace CodeBase.Infrastructure.StateMachine
         {
             var initialPoint = Object.FindObjectOfType<InitialPoint>();
             var hero = _gameFactory.CreateHero(initialPoint);
-            _gameFactory.CreateHud();
+            
+            InitHud(hero);
             
             CameraFollow(hero.transform);
         }

@@ -36,7 +36,7 @@ namespace CodeBase.Infrastructure.Factory
             return gameObject;
         }
 
-        public void CreateHud() => 
+        public GameObject CreateHud() => 
             InstantiateRegistred(AssetPath.HudPath);
 
         public void CleanUp()

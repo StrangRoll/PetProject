@@ -1,7 +1,6 @@
 using CodeBase.Data;
 using CodeBase.Infrastructure.Services.PersistentProgress;
 using CodeBase.Infrastructure.Services.SaveLoad;
-using UnityEngine;
 
 namespace CodeBase.Infrastructure.StateMachine
 {
@@ -39,7 +38,7 @@ namespace CodeBase.Infrastructure.StateMachine
         {
             var progress = new PlayerProgress(SceneNames.Level);
 
-            progress.HeroState.MaxHP = 5;
+            progress.HeroState.MaxHP = 50;
             progress.HeroState.ResetHP();
             
             return progress;
