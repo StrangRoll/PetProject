@@ -35,7 +35,14 @@ namespace CodeBase.Infrastructure.StateMachine
             _progressService.Progress = _saveLoadService.LoadProgress() ?? NewProgress();
         }
 
-        private PlayerProgress NewProgress() =>
-            new PlayerProgress(SceneNames.Level);
+        private PlayerProgress NewProgress()
+        {
+            var progress = new PlayerProgress(SceneNames.Level);
+
+            progress.HeroState.MaxHP = 5;
+            progress.HeroState.ResetHP();
+            
+            return progress;
+        }
     }
 }

@@ -24,11 +24,11 @@ TagManager:
   - 
   - 
   - Player
-  - Aggro
+  - AggroZone
   - StopZone
   - Hittable
   - Pickup
-  - 
+  - AttackZone
   - 
   - 
   - 
