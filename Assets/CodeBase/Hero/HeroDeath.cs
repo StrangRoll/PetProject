@@ -29,8 +29,8 @@ namespace CodeBase.Hero
             _isDead = true;
             _move.enabled = false;
             _animator.PlayDeath();
-            
-            _deathFX.Play();
+
+            Instantiate(_deathFX, transform.position, Quaternion.identity);
         }
     }
 }
