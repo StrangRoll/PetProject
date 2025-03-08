@@ -8,9 +8,9 @@ namespace CodeBase.Enemy
     public class EnemyHealth : MonoBehaviour, IHealth
     {
         [SerializeField] private EnemyAnimator _animator;
+        [SerializeField] private float _max;
         
         private float _current;
-        private float _max;
 
         public event Action<float, float> HealthChanged;
 
@@ -24,6 +24,11 @@ namespace CodeBase.Enemy
         {
             get => _current;
             set => _current = value;
+        }
+
+        private void Start()
+        {
+            _current = _max;
         }
 
         public void TakeDamage(float damage)

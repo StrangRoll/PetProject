@@ -36,7 +36,8 @@ namespace CodeBase.Infrastructure.StateMachine
         {
             InitGameWorld();
             InformProgressReaders();
-
+            ReSimpleButtonInput.UpdateButtonsUpdateButtons();
+            
             _gameStateMachine.Enter<GameLoopState>();
         }
 

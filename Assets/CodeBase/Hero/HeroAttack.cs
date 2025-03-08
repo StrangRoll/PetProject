@@ -1,5 +1,6 @@
 using CodeBase.Data;
 using CodeBase.Infrastructure.Services;
+using CodeBase.Infrastructure.Services.Input;
 using CodeBase.Infrastructure.Services.PersistentProgress;
 using CodeBase.Logic;
 using CodeBase.Services.Input;
@@ -11,7 +12,6 @@ namespace CodeBase.Hero
     public class HeroAttack : MonoBehaviour, ISavedProgressReader
     {
         [SerializeField] private HeroAnimator _animator;
-        [SerializeField] private CharacterController _characterController;
         [SerializeField] private Transform _hitPoint;
         [SerializeField] private int _maxEnemiesCount;
         
@@ -34,7 +34,7 @@ namespace CodeBase.Hero
 
         private void Update()
         {
-            if (_input.IsAttackButtonUp() && _animator.IsAttacking)
+            if (_input.IsAttackButtonUp() && _animator.IsAttacking == false)
                 _animator.PlayAttack();
         }
 

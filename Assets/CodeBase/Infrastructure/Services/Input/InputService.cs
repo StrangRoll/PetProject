@@ -1,3 +1,5 @@
+using CodeBase.Infrastructure.Services.Input;
+using CodeBase.UI;
 using UnityEngine;
 
 namespace CodeBase.Services.Input
@@ -6,11 +8,12 @@ namespace CodeBase.Services.Input
     {
         protected const string Horizontal = "Horizontal";
         protected const string Vertical = "Vertical"; 
-        private const string Button = "Fire";
+        private const string Button = "Attack";
 
         public abstract Vector2 Axis { get; }
 
-        public bool IsAttackButtonUp() => SimpleInput.GetButton(Button);
+        public bool IsAttackButtonUp() => 
+            ReSimpleButtonInput.GetButton(Button);
 
         protected static Vector2 SimpleAxis() =>
             new Vector2(SimpleInput.GetAxis(Horizontal), SimpleInput.GetAxis(Vertical));

@@ -1323,6 +1323,7 @@ GameObject:
   - component: {fileID: 6470906700119921159}
   - component: {fileID: 6874093318286231605}
   - component: {fileID: -2230247253506419342}
+  - component: {fileID: 2840683120971204681}
   m_Layer: 12
   m_Name: hero
   m_TagString: Player
@@ -1348,6 +1349,7 @@ Transform:
   - {fileID: 452262}
   - {fileID: 446732}
   - {fileID: 469876910}
+  - {fileID: 4865276845010512886}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &9588594
@@ -1505,6 +1507,23 @@ MonoBehaviour:
   _animator: {fileID: 1941000699}
   _deathFX: {fileID: 9157105887693468085, guid: 98bbb6e330291f644881c383571c602f,
     type: 3}
+  _attack: {fileID: 2840683120971204681}
+--- !u!114 &2840683120971204681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 176288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2afdedcaa9242648c58342a87c54db5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 1941000699}
+  _characterController: {fileID: 8434433261771688291}
+  _hitPoint: {fileID: 4865276845010512886}
+  _maxEnemiesCount: 5
 --- !u!1 &178646
 GameObject:
   m_ObjectHideFlags: 0
@@ -1916,3 +1935,34 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &269160456029741231
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4865276845010512886}
+  m_Layer: 0
+  m_Name: HitPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 2488908585195742037, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4865276845010512886
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 269160456029741231}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.839, z: 2.089}
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 415700}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

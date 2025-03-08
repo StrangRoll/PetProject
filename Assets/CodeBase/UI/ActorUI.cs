@@ -8,18 +8,32 @@ namespace CodeBase.UI
     {
         [SerializeField] private HpBar _hpBar;
 
-        private IHealth _heroHealth;
+        private IHealth _health;
         
         private void OnDestroy()
         {
-            _heroHealth.HealthChanged -= OnHealthChanged;
+            _health.HealthChanged -= OnHealthChanged;
         }
 
         public void Init(HeroHealth heroHealth)
         {
-            _heroHealth = heroHealth;
+            _health = heroHealth;
             
-            _heroHealth.HealthChanged += OnHealthChanged;
+            _health.HealthChanged += OnHealthChanged;
+        }
+
+        private void Start()
+        {
+            TestCheckIHealth();
+        }
+
+        private void TestCheckIHealth()
+        {
+            if (_health == null)
+            {
+                _health = GetComponentInChildren<IHealth>();
+                _health.HealthChanged += OnHealthChanged;
+            }
         }
 
         private void UpdateHpBar(float current, float max)
