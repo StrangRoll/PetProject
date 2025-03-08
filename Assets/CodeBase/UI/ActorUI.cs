@@ -1,4 +1,5 @@
 using CodeBase.Hero;
+using CodeBase.Logic;
 using UnityEngine;
 
 namespace CodeBase.UI
@@ -7,7 +8,7 @@ namespace CodeBase.UI
     {
         [SerializeField] private HpBar _hpBar;
 
-        private HeroHealth _heroHealth;
+        private IHealth _heroHealth;
         
         private void OnDestroy()
         {

@@ -999,7 +999,7 @@ MonoBehaviour:
   _animator: {fileID: 5056841022382216381}
   _cleaving: 0.5
   _attackPosition: {fileID: 2755558501600604121}
-  _damage: 50
+  _damage: 10
 --- !u!114 &1137679191138912409
 MonoBehaviour:
   m_ObjectHideFlags: 0

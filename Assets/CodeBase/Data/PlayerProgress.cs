@@ -7,11 +7,13 @@ namespace CodeBase.Data
     {
         public State HeroState;
         public WorldData WorldData;
+        public Stats HeroStats;
 
         public PlayerProgress(string initialLevel)
         {
             WorldData = new WorldData(new PositionOnLevel(initialLevel));
             HeroState = new State();
+            HeroStats = new Stats();
         }
     }
 }

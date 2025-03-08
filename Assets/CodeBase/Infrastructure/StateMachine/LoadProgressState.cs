@@ -6,6 +6,10 @@ namespace CodeBase.Infrastructure.StateMachine
 {
     public class LoadProgressState : IState
     {
+        private const int StandartMaxHp = 50;
+        private const float StandartDamage = 1;
+        private const float StandartDamageRadius = .5f;
+        
         private readonly GameStateMachine _gameStateMachine;
         private readonly IPersistentProgressService _progressService;
         private readonly SaveLoadService saveLoadService;
@@ -38,8 +42,10 @@ namespace CodeBase.Infrastructure.StateMachine
         {
             var progress = new PlayerProgress(SceneNames.Level);
 
-            progress.HeroState.MaxHP = 50;
+            progress.HeroState.MaxHP = StandartMaxHp;
             progress.HeroState.ResetHP();
+            progress.HeroStats.Damage = StandartDamage;
+            progress.HeroStats.DamageRadius = StandartDamageRadius;
             
             return progress;
         }

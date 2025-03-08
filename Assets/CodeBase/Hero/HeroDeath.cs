@@ -9,6 +9,7 @@ namespace CodeBase.Hero
         [SerializeField] private HeroMove _move;
         [SerializeField] private HeroAnimator _animator;
         [SerializeField] private ParticleSystem _deathFX;
+        [SerializeField] private HeroAttack _attack;
         
         private bool _isDead = false;
         
@@ -28,6 +29,7 @@ namespace CodeBase.Hero
         {
             _isDead = true;
             _move.enabled = false;
+            _attack.enabled = false;
             _animator.PlayDeath();
 
             Instantiate(_deathFX, transform.position, Quaternion.identity);

@@ -2,6 +2,7 @@ using System.Linq;
 using CodeBase.Hero;
 using CodeBase.Infrastructure.Factory;
 using CodeBase.Infrastructure.Services;
+using CodeBase.Logic;
 using UnityEngine;
 
 namespace CodeBase.Enemy
@@ -27,7 +28,7 @@ namespace CodeBase.Enemy
 
         private void Awake()
         {
-            _layerMask = 1 << LayerMask.NameToLayer("Player");
+            _layerMask = 1 << LayerMask.NameToLayer(LayerName.Player);
             _factory = AllServices.Container.Single<IGameFactory>();
             _factory.HeroCreated += OnHeroCreated;
         }
@@ -64,7 +65,7 @@ namespace CodeBase.Enemy
             if (Hit(out Collider hit))
             {
                 PhysicsDebug.DrawDebug( _attackPosition.position, _cleaving, 2f);
-                hit.transform.GetComponent<HeroHealth>().TakeDamage(_damage);
+                hit.transform.GetComponent<IHealth>().TakeDamage(_damage);
             }
         }
 
