@@ -12,4 +12,4 @@ namespace CodeBase.Editor
             PlayerPrefs.Save();
         }
     }
-}
+} 
