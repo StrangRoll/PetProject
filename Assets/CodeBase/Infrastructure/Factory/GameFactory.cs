@@ -48,10 +48,10 @@ namespace CodeBase.Infrastructure.Factory
         private void RegisterProgressWatchers(GameObject gameObject)
         {
             foreach (var progressReader in gameObject.GetComponentsInChildren<ISavedProgressReader>()) 
-                Registrer(progressReader);
+                Register(progressReader);
         }
 
-        private void Registrer(ISavedProgressReader progressReader)
+        public void Register(ISavedProgressReader progressReader)
         {
             if (progressReader is ISavedProgress progressWriter)
                 ProgressWriters.Add(progressWriter); 

@@ -14,7 +14,8 @@ namespace CodeBase.Infrastructure.StateMachine
         private readonly LoadingCurtain _loadingCurtain;
         private readonly IGameFactory _gameFactory;
         private readonly IPersistentProgressService _progressService;
-
+        private string EnemySpawnerTag = "EnemySpawner";
+        
         public LoadLevelState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, 
             LoadingCurtain loadingCurtain, IGameFactory gameFactory, IPersistentProgressService progressService)
         {
@@ -31,7 +32,6 @@ namespace CodeBase.Infrastructure.StateMachine
             _gameFactory.CleanUp();
             _loadingCurtain.Show();
         }
-
         private void OnLoaded()
         {
             InitGameWorld();
@@ -58,12 +58,23 @@ namespace CodeBase.Infrastructure.StateMachine
 
         private void InitGameWorld()
         {
+            InitSpawners();
+            
             var initialPoint = Object.FindObjectOfType<InitialPoint>();
             var hero = _gameFactory.CreateHero(initialPoint);
             
             InitHud(hero);
             
             CameraFollow(hero.transform);
+        }
+
+        private void InitSpawners()
+        {
+            foreach (var spawnerGameObject in GameObject.FindGameObjectsWithTag(EnemySpawnerTag))
+            {
+                var spawner = spawnerGameObject.GetComponent<EnemySpawner>();
+                _gameFactory.Register(spawner);
+            }
         }
 
         private void CameraFollow(Transform hero)
