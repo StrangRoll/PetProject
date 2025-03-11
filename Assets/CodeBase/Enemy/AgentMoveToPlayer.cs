@@ -13,40 +13,15 @@ namespace CodeBase.Enemy
         private NavMeshAgent _agent;
         
         private Transform _heroTransform;
-        private IGameFactory _gameFactory;
-        private bool IsHeroInitialized = false;
-            
-        private void Start()
-        {
-            _gameFactory = AllServices.Container.Single<IGameFactory>();
-            
-            if (_gameFactory.HeroGameObject != null)
-                InitHeroTransform();
-            else
-                _gameFactory.HeroCreated += OnHeroCreated;
-        }
-
+        
         private void Update()
         {
-            if (IsHeroInitialized == false) 
-                return;
-            
             if (HeroNotReached())
                 _agent.destination = _heroTransform.position;
         }
 
-        private void OnHeroCreated()
-        {
-            InitHeroTransform();
-            _gameFactory.HeroCreated -= OnHeroCreated;
-        }
-
-        private void InitHeroTransform()
-        {
-            _heroTransform = _gameFactory.HeroGameObject.transform;
-            IsHeroInitialized = true;
-        }
-
+        public void Init(Transform heroTransform) => 
+            _heroTransform = heroTransform;
 
         private bool HeroNotReached() => 
             Vector3.Distance(_agent.transform.position, _heroTransform.position) > MinDistance;

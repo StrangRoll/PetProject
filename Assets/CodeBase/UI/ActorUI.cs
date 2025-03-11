@@ -15,7 +15,7 @@ namespace CodeBase.UI
             _health.HealthChanged -= OnHealthChanged;
         }
 
-        public void Init(HeroHealth heroHealth)
+        public void Init(IHealth heroHealth)
         {
             _health = heroHealth;
             

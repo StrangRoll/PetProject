@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db3dd6072e0043a79b5e384139ff6986, type: 3}
   m_Name: Litch
   m_EditorClassIdentifier: 
-  Hp: 0
-  Damage: 0
-  EffectiveDistance: 0
-  Cleavage: 0
+  MonsterTypeId: 0
+  Hp: 2
+  Damage: 10
+  Cleavage: 0.5
+  MoveSpeed: 4
   Prefab: {fileID: 7131449229292486086, guid: 4df872a1642bf4549a960b744f373352, type: 3}

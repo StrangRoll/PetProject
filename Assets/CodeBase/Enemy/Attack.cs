@@ -16,7 +16,6 @@ namespace CodeBase.Enemy
         [SerializeField] private Transform _attackPosition;
         [SerializeField] private float _damage;
         
-        private IGameFactory _factory;
         private Transform _heroTransform;
         private Collider[] _hits = new Collider[1];
 
@@ -28,8 +27,6 @@ namespace CodeBase.Enemy
         private void Awake()
         {
             _layerMask = 1 << LayerMask.NameToLayer(LayerName.Player);
-            _factory = AllServices.Container.Single<IGameFactory>();
-            _factory.HeroCreated += OnHeroCreated;
         }
 
         private void Update()
@@ -45,6 +42,13 @@ namespace CodeBase.Enemy
 
         public void EnableAttack() => 
             _attackIsActive = true;
+
+        public void Init(Transform heroTransform, float cleaving, float damage)
+        {
+            _cleaving = cleaving;
+            _damage = damage;
+            _heroTransform = heroTransform;
+        }
 
         private void UpdateCooldown()
         {
@@ -82,12 +86,7 @@ namespace CodeBase.Enemy
             return hitsCount > 0;
         }
 
-
-        private void OnHeroCreated()
-        {
-            _heroTransform = _factory.HeroGameObject.transform;
-        }
-
+        
         private bool CooldownIsUp() => 
             _attackCooldown <= 0;
 
