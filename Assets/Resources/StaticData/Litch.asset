@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db3dd6072e0043a79b5e384139ff6986, type: 3}
+  m_Name: Litch
+  m_EditorClassIdentifier: 
+  Hp: 0
+  Damage: 0
+  EffectiveDistance: 0
+  Cleavage: 0
+  Prefab: {fileID: 7131449229292486086, guid: 4df872a1642bf4549a960b744f373352, type: 3}
