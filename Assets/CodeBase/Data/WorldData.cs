@@ -8,9 +8,10 @@ namespace CodeBase.Data
         public LootData LootData;
         public PositionOnLevel PositionOnLevel;
 
-        public WorldData(PositionOnLevel positionOnLevel)
+        public WorldData(PositionOnLevel positionOnLevel, LootData lootData)
         {
             PositionOnLevel = positionOnLevel;
+            LootData = lootData;
         }
     }
 }

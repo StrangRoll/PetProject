@@ -10,9 +10,9 @@ namespace CodeBase.Data
         public Stats HeroStats;
         public KillData KillData;
 
-        public PlayerProgress(string initialLevel)
+        public PlayerProgress(string initialLevel, int startLoot)
         {
-            WorldData = new WorldData(new PositionOnLevel(initialLevel));
+            WorldData = new WorldData(new PositionOnLevel(initialLevel), new LootData(startLoot));
             HeroState = new State();
             HeroStats = new Stats();
             KillData = new KillData();

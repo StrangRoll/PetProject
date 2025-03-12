@@ -7,6 +7,11 @@ namespace CodeBase.Data
     {
         public int Collected;
 
+        public LootData(int startCollected)
+        {
+            Collected = startCollected;
+        }
+        
         public void Collect(Loot loot)
         {
             Collected += loot.Value;

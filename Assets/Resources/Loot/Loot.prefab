@@ -31,7 +31,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6573276039690250080}
+  m_Father: {fileID: 1524742051567155943}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1148823120732888074
 MeshFilter:
@@ -83,6 +83,39 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &2830830900208041897
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1524742051567155943}
+  m_Layer: 16
+  m_Name: Visual
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1524742051567155943
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2830830900208041897}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1148823120736312362}
+  - {fileID: 3296613180619666064}
+  m_Father: {fileID: 6573276039690250080}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7880382966684822008
 GameObject:
   m_ObjectHideFlags: 0
@@ -93,6 +126,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6573276039690250080}
   - component: {fileID: 5186074521695895453}
+  - component: {fileID: 7729829808645393869}
   m_Layer: 16
   m_Name: Loot
   m_TagString: Untagged
@@ -113,8 +147,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1148823120736312362}
-  - {fileID: 3296613180619666064}
+  - {fileID: 1524742051567155943}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &5186074521695895453
@@ -138,13 +171,28 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.4, y: 1, z: 0.4}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7729829808645393869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7880382966684822008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d550cc18ad8429a8949f79c42613f98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _lootVisual: {fileID: 2830830900208041897}
+  _pickupFxPrefab: {fileID: 8771972552311404798, guid: 7dae2867a0ba1e948873236a91486044,
+    type: 3}
 --- !u!1001 &16135324013591522
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 6573276039690250080}
+    m_TransformParent: {fileID: 1524742051567155943}
     m_Modifications:
     - target: {fileID: 1318935079978438871, guid: 29eb2adb0707b3d4c8e307c2d7de594b,
         type: 3}
@@ -160,6 +208,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: CFXR3 Magic Aura A (Runic)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3280519133390621005, guid: 29eb2adb0707b3d4c8e307c2d7de594b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3280519133390621042, guid: 29eb2adb0707b3d4c8e307c2d7de594b,
         type: 3}
@@ -184,17 +237,17 @@ PrefabInstance:
     - target: {fileID: 3280519133390621042, guid: 29eb2adb0707b3d4c8e307c2d7de594b,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3280519133390621042, guid: 29eb2adb0707b3d4c8e307c2d7de594b,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3280519133390621042, guid: 29eb2adb0707b3d4c8e307c2d7de594b,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3280519133390621042, guid: 29eb2adb0707b3d4c8e307c2d7de594b,
         type: 3}
@@ -219,7 +272,7 @@ PrefabInstance:
     - target: {fileID: 3280519133430969737, guid: 29eb2adb0707b3d4c8e307c2d7de594b,
         type: 3}
       propertyPath: m_Intensity
-      value: 1.058599
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7893921968227561089, guid: 29eb2adb0707b3d4c8e307c2d7de594b,
         type: 3}

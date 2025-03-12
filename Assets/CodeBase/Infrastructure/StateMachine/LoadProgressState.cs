@@ -9,6 +9,7 @@ namespace CodeBase.Infrastructure.StateMachine
         private const int StandartMaxHp = 50;
         private const float StandartDamage = 1;
         private const float StandartDamageRadius = .5f;
+        private const int StandartLoot = 0;
         
         private readonly GameStateMachine _gameStateMachine;
         private readonly IPersistentProgressService _progressService;
@@ -40,7 +41,7 @@ namespace CodeBase.Infrastructure.StateMachine
 
         private PlayerProgress NewProgress()
         {
-            var progress = new PlayerProgress(SceneNames.Level);
+            var progress = new PlayerProgress(SceneNames.Level, StandartLoot);
 
             progress.HeroState.MaxHP = StandartMaxHp;
             progress.HeroState.ResetHP();
