@@ -44,8 +44,15 @@ namespace CodeBase.Infrastructure.Factory
             return gameObject;
         }
 
-        public GameObject CreateHud() => 
-            InstantiateRegistred(AssetPath.HudPath);
+        public GameObject CreateHud()
+        {
+            var hud = InstantiateRegistred(AssetPath.HudPath);
+
+            hud.GetComponentInChildren<LootCounter>()
+                .Init(_progressService.Progress.WorldData);
+            
+            return hud;
+        }
 
         public void CleanUp()
         {

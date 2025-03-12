@@ -7,14 +7,18 @@ namespace CodeBase.Data
     {
         public int Collected;
 
+        public Action Changed;
+        
         public LootData(int startCollected)
         {
             Collected = startCollected;
         }
-        
+
+
         public void Collect(Loot loot)
         {
             Collected += loot.Value;
+            Changed?.Invoke();
         }
     }
 }
