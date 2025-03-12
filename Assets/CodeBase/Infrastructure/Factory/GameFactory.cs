@@ -1,6 +1,6 @@
-using System;
 using System.Collections.Generic;
 using CodeBase.Enemy;
+using CodeBase.Hero;
 using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.Infrastructure.Services;
 using CodeBase.Infrastructure.Services.PersistentProgress;
@@ -16,17 +16,20 @@ namespace CodeBase.Infrastructure.Factory
     {
         private readonly IAssetProvider _assets;
         private readonly IStaticDataService _staticData;
+        private readonly IPersistentProgressService _progressService;
 
         public List<ISavedProgressReader> ProgressReaders { get; } = new List<ISavedProgressReader>();
         public List<ISavedProgress> ProgressWriters { get; } = new List<ISavedProgress>();
         
         public GameObject HeroGameObject { get; private set; }
         
-        public GameFactory(IAssetProvider assets, IStaticDataService staticData)
+        public GameFactory(IAssetProvider assets, IStaticDataService staticData, IPersistentProgressService progressService)
         {
             _assets = assets;
             _staticData = staticData;
+            _progressService = progressService;
         }
+        
         public GameObject CreateHero(InitialPoint at)
         {
             HeroGameObject = InstantiateRegistred(AssetPath.HeroPath, at.transform.position);
@@ -69,7 +72,20 @@ namespace CodeBase.Infrastructure.Factory
             if (monster.TryGetComponent<RotateToHero>(out var rotateToHero))
                 rotateToHero.Init(HeroGameObject.transform);
             
+            var loot = monster.GetComponentInChildren<LootSpawner>();
+            loot.Init(this);
+            loot.SetLoot(monsterData.MinLoot, monsterData.MaxLoot);
+            
             return monster;
+        }
+
+        public LootPiece CreateLoot()
+        {
+            var lootPiece = InstantiateRegistred(AssetPath.Loot)
+                .GetComponent<LootPiece>();
+            
+            lootPiece.Construct(_progressService.Progress.WorldData);
+            return lootPiece;
         }
 
         private void RegisterProgressWatchers(GameObject gameObject)

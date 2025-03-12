@@ -3,7 +3,6 @@ using CodeBase.Infrastructure.Services;
 using CodeBase.Infrastructure.Services.Input;
 using CodeBase.Infrastructure.Services.PersistentProgress;
 using CodeBase.Logic;
-using CodeBase.Services.Input;
 using UnityEngine;
 
 namespace CodeBase.Hero

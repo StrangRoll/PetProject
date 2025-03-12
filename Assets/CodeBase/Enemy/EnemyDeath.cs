@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Security.Cryptography;
 using UnityEngine;
 
 namespace CodeBase.Enemy
@@ -12,6 +11,8 @@ namespace CodeBase.Enemy
         [SerializeField] private EnemyAnimator _animator;
         [SerializeField] private ParticleSystem _deathFX;
         [SerializeField] private float _timeToDestroyCorpse;
+        [SerializeField] private AgentMoveToPlayer _mover;
+        [SerializeField] private RotateToHero _rotateToHero = null;
 
         public event Action EnemyDied;
         
@@ -31,6 +32,11 @@ namespace CodeBase.Enemy
         {
             _health.HealthChanged -= OnHealthChanged;
             _animator.PlayDeath();
+            _mover.enabled = false;
+            
+            if (_rotateToHero != null)
+                _rotateToHero.enabled = false;
+            
             Instantiate(_deathFX, transform.position, Quaternion.identity);
             EnemyDied?.Invoke();
 
