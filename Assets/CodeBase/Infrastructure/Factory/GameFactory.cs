@@ -17,25 +17,26 @@ namespace CodeBase.Infrastructure.Factory
         private readonly IAssetProvider _assets;
         private readonly IStaticDataService _staticData;
         private readonly IPersistentProgressService _progressService;
+        private IUncollectedLootChecker _uncollectedLootChecker;
 
         public List<ISavedProgressReader> ProgressReaders { get; } = new List<ISavedProgressReader>();
         public List<ISavedProgress> ProgressWriters { get; } = new List<ISavedProgress>();
         
         public GameObject HeroGameObject { get; private set; }
         
-        public GameFactory(IAssetProvider assets, IStaticDataService staticData, IPersistentProgressService progressService)
+        public GameFactory(IAssetProvider assets, IStaticDataService staticData, IPersistentProgressService progressService, IUncollectedLootChecker uncollectedLootChecker)
         {
             _assets = assets;
             _staticData = staticData;
             _progressService = progressService;
+            _uncollectedLootChecker = uncollectedLootChecker;
         }
-        
+
         public GameObject CreateHero(InitialPoint at)
         {
             HeroGameObject = InstantiateRegistred(AssetPath.HeroPath, at.transform.position);
             return HeroGameObject;
         }
-
 
         private GameObject InstantiateRegistred(string prefab, Vector3 at = default)
         {
@@ -80,7 +81,7 @@ namespace CodeBase.Infrastructure.Factory
                 rotateToHero.Init(HeroGameObject.transform);
             
             var loot = monster.GetComponentInChildren<LootSpawner>();
-            loot.Init(this);
+            loot.Init(this, _uncollectedLootChecker);
             loot.SetLoot(monsterData.MinLoot, monsterData.MaxLoot);
             
             return monster;
@@ -90,8 +91,9 @@ namespace CodeBase.Infrastructure.Factory
         {
             var lootPiece = InstantiateRegistred(AssetPath.Loot)
                 .GetComponent<LootPiece>();
-            
+
             lootPiece.Construct(_progressService.Progress.WorldData);
+            
             return lootPiece;
         }
 

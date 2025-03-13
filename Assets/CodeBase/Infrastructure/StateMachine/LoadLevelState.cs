@@ -14,16 +14,17 @@ namespace CodeBase.Infrastructure.StateMachine
         private readonly LoadingCurtain _loadingCurtain;
         private readonly IGameFactory _gameFactory;
         private readonly IPersistentProgressService _progressService;
-        private string EnemySpawnerTag = "EnemySpawner";
+        private readonly IUncollectedLootChecker _uncollectedLootChecker;
         
         public LoadLevelState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, 
-            LoadingCurtain loadingCurtain, IGameFactory gameFactory, IPersistentProgressService progressService)
+            LoadingCurtain loadingCurtain, IGameFactory gameFactory, IPersistentProgressService progressService, IUncollectedLootChecker uncollectedLootChecker)
         {
             _gameStateMachine = gameStateMachine;
             _sceneLoader = sceneLoader;
             _loadingCurtain = loadingCurtain;
             _gameFactory = gameFactory;
             _progressService = progressService;
+            _uncollectedLootChecker = uncollectedLootChecker;
         }
 
         public void Enter(string sceneName)
@@ -58,25 +59,32 @@ namespace CodeBase.Infrastructure.StateMachine
 
         private void InitGameWorld()
         {
-            InitSpawners();
+            InitUsingTag<EnemySpawner>(GameTags.EnemySpawner);
             
             var initialPoint = Object.FindObjectOfType<InitialPoint>();
             var hero = _gameFactory.CreateHero(initialPoint);
             
             InitHud(hero);
+            InitUncollectedLoot();
             
             CameraFollow(hero.transform);
         }
 
-        private void InitSpawners()
+        private void InitUncollectedLoot()
         {
-            foreach (var spawnerGameObject in GameObject.FindGameObjectsWithTag(EnemySpawnerTag))
-            {
-                var spawner = spawnerGameObject.GetComponent<EnemySpawner>();
-                _gameFactory.Register(spawner);
-            }
+            _uncollectedLootChecker.Init(_gameFactory);
+            _gameFactory.Register(_uncollectedLootChecker);
         }
 
+        private void InitUsingTag<T>(string tag) where T : ISavedProgressReader
+        {
+            foreach (var gameObject in GameObject.FindGameObjectsWithTag(tag))
+            {
+                var element = gameObject.GetComponent<T>();
+                _gameFactory.Register(element);
+            }
+        }
+        
         private void CameraFollow(Transform hero)
         {
             Camera.main

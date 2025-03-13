@@ -3,7 +3,6 @@ using CodeBase.Data;
 using CodeBase.Infrastructure.Services;
 using CodeBase.Infrastructure.Services.Input;
 using CodeBase.Infrastructure.Services.PersistentProgress;
-using CodeBase.Services.Input;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -28,7 +27,7 @@ public class HeroMove : MonoBehaviour, ISavedProgress
     private void Update()
     {
          var movementVector = Vector3.zero;
-
+         
          if (_inputService.Axis.sqrMagnitude > Constants.Epsilon)
          {
              movementVector = _camera.transform.TransformDirection(_inputService.Axis);

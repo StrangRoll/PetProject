@@ -5,6 +5,7 @@ using CodeBase.Infrastructure.Services;
 using CodeBase.Infrastructure.Services.Input;
 using CodeBase.Infrastructure.Services.PersistentProgress;
 using CodeBase.Infrastructure.Services.SaveLoad;
+using CodeBase.Logic;
 using CodeBase.Services.Input;
 using CodeBase.StaticData;
 using UnityEngine;
@@ -46,10 +47,11 @@ namespace CodeBase.Infrastructure.StateMachine
             _allServices.RegisterSingle<IInputService>(InputService());
             _allServices.RegisterSingle<IAssetProvider>(new AssetProvider());
             _allServices.RegisterSingle<IPersistentProgressService>(new PersistentProgressService());
+            _allServices.RegisterSingle<IUncollectedLootChecker>(new UncollectedLootChecker());
             
             _allServices.RegisterSingle<IGameFactory>(
                 new GameFactory(_allServices.Single<IAssetProvider>(), _allServices.Single<IStaticDataService>(),
-                    _allServices.Single<IPersistentProgressService>()));
+                    _allServices.Single<IPersistentProgressService>(), _allServices.Single<IUncollectedLootChecker>()));
             
             _allServices.RegisterSingle<ISaveLoadService>(new SaveLoadService(_allServices.Single<IPersistentProgressService>(), 
                 _allServices.Single<IGameFactory>()));

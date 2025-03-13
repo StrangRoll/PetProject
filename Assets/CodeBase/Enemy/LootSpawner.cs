@@ -1,5 +1,6 @@
 using CodeBase.Data;
 using CodeBase.Infrastructure.Factory;
+using CodeBase.Logic;
 using UnityEngine;
 
 namespace CodeBase.Enemy
@@ -11,6 +12,7 @@ namespace CodeBase.Enemy
         private IGameFactory _factory;
         private int _lootMin;
         private int _lootMax;
+        private IUncollectedLootChecker _uncollectedLootChecker;
 
         private void OnEnable()
         {
@@ -22,8 +24,11 @@ namespace CodeBase.Enemy
             _enemyDeath.EnemyDied -= OnEnemyDied;;
         }
         
-        public void Init(IGameFactory factory) 
-            => _factory = factory;
+        public void Init(IGameFactory factory, IUncollectedLootChecker uncollectedLootChecker)
+        {
+            _factory = factory;
+            _uncollectedLootChecker = uncollectedLootChecker;
+        }
 
         public void SetLoot(int min, int max)
         {
@@ -46,6 +51,8 @@ namespace CodeBase.Enemy
             lootItem.Init(Random.Range(_lootMin, _lootMax));
             
             loot.Init(lootItem);
+
+            _uncollectedLootChecker.AddNewLoot(lootItem, loot);
         }
     }
 }

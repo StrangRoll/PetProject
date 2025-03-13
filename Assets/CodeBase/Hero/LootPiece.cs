@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using CodeBase.Data;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace CodeBase.Hero
 {
@@ -10,10 +12,12 @@ namespace CodeBase.Hero
         [SerializeField] private ParticleSystem _pickupFxPrefab;
         
         private Loot _loot;
-        private bool _picked;
+        private bool _picked = false;
         private WorldData _worldData;
         private float _destoryTimer = 1.5f;
 
+        public event Action<Loot, LootPiece> Picked;
+        
         public void Construct(WorldData worldData) => 
             _worldData = worldData;
 
@@ -21,7 +25,7 @@ namespace CodeBase.Hero
         {
             _loot = loot;
         }
-
+        
         private void OnTriggerEnter(Collider other) => Pickup();
 
         private void Pickup()
@@ -35,6 +39,8 @@ namespace CodeBase.Hero
             _lootVisual.SetActive(false);
             
             PlayPickupFx();
+            Picked?.Invoke(_loot, this);
+            
             StartCoroutine(StartDestroyTimer());
         }
 
@@ -46,11 +52,15 @@ namespace CodeBase.Hero
         private IEnumerator StartDestroyTimer()
         {
             yield return new WaitForSeconds(_destoryTimer);
+            Destroy(gameObject);
         }
 
         private void PlayPickupFx()
         {
             Instantiate(_pickupFxPrefab, transform.position, Quaternion.identity);
         }
+        
+        private static string CurrentLevelName() =>
+            SceneManager.GetActiveScene().name;
     }
 }

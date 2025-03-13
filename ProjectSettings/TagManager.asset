@@ -11,6 +11,7 @@ TagManager:
   - InitialPoint
   - LoadingCurtain
   - EnemySpawner
+  - LootPiece
   layers:
   - Default
   - TransparentFX
