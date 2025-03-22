@@ -54,7 +54,7 @@ namespace CodeBase.Infrastructure.Factory
             
             return hud;
         }
-
+        
         public void CleanUp()
         {
             ProgressReaders.Clear();
@@ -85,6 +85,15 @@ namespace CodeBase.Infrastructure.Factory
             loot.SetLoot(monsterData.MinLoot, monsterData.MaxLoot);
             
             return monster;
+        }
+
+        public void CreateSpawner(Vector3 position, string spawnerId, MonsterTypeId spawnerMonsterTypeId)
+        {
+            var spawner = InstantiateRegistred(AssetPath.Spawner, position)
+                .GetComponent<EnemySpawner>();
+            
+            spawner.Id = spawnerId;
+            spawner.MonsterTypeId = spawnerMonsterTypeId;
         }
 
         public LootPiece CreateLoot()

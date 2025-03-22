@@ -7,5 +7,6 @@ namespace CodeBase.Infrastructure.Services
     {
         void LoadMonsters();
         MonsterStaticData ForMonster(MonsterTypeId typeId);
+        LevelStaticData ForLevel(string sceneName);
     }
 }

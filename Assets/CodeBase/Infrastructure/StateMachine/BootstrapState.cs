@@ -1,4 +1,3 @@
-using CodeBase.Data;
 using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.Infrastructure.Factory;
 using CodeBase.Infrastructure.Services;
@@ -50,7 +49,7 @@ namespace CodeBase.Infrastructure.StateMachine
             _allServices.RegisterSingle<IUncollectedLootChecker>(new UncollectedLootChecker());
             
             _allServices.RegisterSingle<IGameFactory>(
-                new GameFactory(_allServices.Single<IAssetProvider>(), _allServices.Single<IStaticDataService>(),
+                new  GameFactory(_allServices.Single<IAssetProvider>(), _allServices.Single<IStaticDataService>(),
                     _allServices.Single<IPersistentProgressService>(), _allServices.Single<IUncollectedLootChecker>()));
             
             _allServices.RegisterSingle<ISaveLoadService>(new SaveLoadService(_allServices.Single<IPersistentProgressService>(), 

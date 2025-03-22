@@ -14,6 +14,7 @@ namespace CodeBase.Infrastructure.Factory
         GameObject CreateHero(InitialPoint at);
         GameObject HeroGameObject { get; }
         GameObject CreateHud();
+        void CreateSpawner(Vector3 position, string spawnerId, MonsterTypeId spawnerMonsterTypeId);
         void Register(ISavedProgressReader progressReader);
         void CleanUp();
         GameObject CreateMonster(MonsterTypeId typeId, Transform parent);

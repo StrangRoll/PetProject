@@ -29,6 +29,5 @@ namespace CodeBase.Data
             UncollectedLoot.Add(uncollectedLoot);
         }
 
-        public void ClearUncollectedLoot() => UncollectedLoot.Clear();
     }
 }

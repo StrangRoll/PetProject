@@ -1,9 +1,11 @@
 using CodeBase.Hero;
 using CodeBase.Infrastructure.Factory;
+using CodeBase.Infrastructure.Services;
 using CodeBase.Infrastructure.Services.PersistentProgress;
 using CodeBase.Logic;
 using CodeBase.UI;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace CodeBase.Infrastructure.StateMachine
 {
@@ -12,12 +14,14 @@ namespace CodeBase.Infrastructure.StateMachine
         private readonly GameStateMachine _gameStateMachine;
         private readonly SceneLoader _sceneLoader;
         private readonly LoadingCurtain _loadingCurtain;
-        private readonly IGameFactory _gameFactory;
+        private readonly IGameFactory  _gameFactory;
         private readonly IPersistentProgressService _progressService;
         private readonly IUncollectedLootChecker _uncollectedLootChecker;
+        private readonly IStaticDataService _staticData;
         
         public LoadLevelState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, 
-            LoadingCurtain loadingCurtain, IGameFactory gameFactory, IPersistentProgressService progressService, IUncollectedLootChecker uncollectedLootChecker)
+            LoadingCurtain loadingCurtain, IGameFactory gameFactory, IPersistentProgressService progressService, 
+            IUncollectedLootChecker uncollectedLootChecker, IStaticDataService staticData)
         {
             _gameStateMachine = gameStateMachine;
             _sceneLoader = sceneLoader;
@@ -25,6 +29,7 @@ namespace CodeBase.Infrastructure.StateMachine
             _gameFactory = gameFactory;
             _progressService = progressService;
             _uncollectedLootChecker = uncollectedLootChecker;
+            _staticData = staticData;
         }
 
         public void Enter(string sceneName)
@@ -59,7 +64,8 @@ namespace CodeBase.Infrastructure.StateMachine
 
         private void InitGameWorld()
         {
-            InitUsingTag<EnemySpawner>(GameTags.EnemySpawner);
+            _uncollectedLootChecker.Init(_gameFactory);
+            InitSpawners();
             
             var initialPoint = Object.FindObjectOfType<InitialPoint>();
             var hero = _gameFactory.CreateHero(initialPoint);
@@ -70,19 +76,20 @@ namespace CodeBase.Infrastructure.StateMachine
             CameraFollow(hero.transform);
         }
 
-        private void InitUncollectedLoot()
+        private void InitSpawners()
         {
-            _uncollectedLootChecker.Init(_gameFactory);
-            _gameFactory.Register(_uncollectedLootChecker);
+            var sceneKey = SceneManager.GetActiveScene().name;
+            var levelData = _staticData.ForLevel(sceneKey);
+
+            foreach (var spawner in levelData.EnemySpawners)
+            {
+                _gameFactory.CreateSpawner(spawner.Position, spawner.Id, spawner.MonsterTypeId);
+            }
         }
 
-        private void InitUsingTag<T>(string tag) where T : ISavedProgressReader
+        private void InitUncollectedLoot()
         {
-            foreach (var gameObject in GameObject.FindGameObjectsWithTag(tag))
-            {
-                var element = gameObject.GetComponent<T>();
-                _gameFactory.Register(element);
-            }
+            _gameFactory.Register(_uncollectedLootChecker);
         }
         
         private void CameraFollow(Transform hero)
