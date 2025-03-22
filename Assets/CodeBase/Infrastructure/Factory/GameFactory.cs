@@ -5,6 +5,7 @@ using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.Infrastructure.Services;
 using CodeBase.Infrastructure.Services.PersistentProgress;
 using CodeBase.Logic;
+using CodeBase.Logic.EnemySpawners;
 using CodeBase.UI;
 using UnityEngine;
 using UnityEngine.AI;
@@ -90,7 +91,8 @@ namespace CodeBase.Infrastructure.Factory
         public void CreateSpawner(Vector3 position, string spawnerId, MonsterTypeId spawnerMonsterTypeId)
         {
             var spawner = InstantiateRegistred(AssetPath.Spawner, position)
-                .GetComponent<EnemySpawner>();
+                .GetComponent<SpawnPoint>();
+            spawner.Init(this);
             
             spawner.Id = spawnerId;
             spawner.MonsterTypeId = spawnerMonsterTypeId;

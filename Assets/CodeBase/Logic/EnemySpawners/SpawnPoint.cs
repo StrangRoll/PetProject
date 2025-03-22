@@ -1,30 +1,25 @@
 using CodeBase.Data;
 using CodeBase.Enemy;
 using CodeBase.Infrastructure.Factory;
-using CodeBase.Infrastructure.Services;
 using CodeBase.Infrastructure.Services.PersistentProgress;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-namespace CodeBase.Logic
+namespace CodeBase.Logic.EnemySpawners
 {
-    [RequireComponent(typeof(UniqueId))]
-    public class EnemySpawner : MonoBehaviour, ISavedProgress
+    public class SpawnPoint : MonoBehaviour, ISavedProgress
     {
-        [FormerlySerializedAs("_monsterTypeId")] public MonsterTypeId MonsterTypeId;
-        [FormerlySerializedAs("_id")] public string Id;
+        public MonsterTypeId MonsterTypeId;
         
         [SerializeField] private bool _slain;
         
         private IGameFactory _factory;
         private EnemyDeath _enemyDeath;
 
-        private void Awake()
-        {
-            Id = GetComponent<UniqueId>().Id;
-            _factory = AllServices.Container.Single<IGameFactory>();
-        }
-        
+        public string Id { get; set; }
+
+        public void Init(IGameFactory factory) => 
+            _factory = factory;
+
         public void LoadProgress(PlayerProgress progress)
         {
             if (progress.KillData.ClearedSpawners.Contains(Id))
