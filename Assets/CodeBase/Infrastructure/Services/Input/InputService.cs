@@ -1,9 +1,7 @@
-using CodeBase.Infrastructure.Services.Input;
-using CodeBase.UI;
 using CodeBase.UI.Elements;
 using UnityEngine;
 
-namespace CodeBase.Services.Input
+namespace CodeBase.Infrastructure.Services.Input
 {
     public abstract class InputService : IInputService
     {

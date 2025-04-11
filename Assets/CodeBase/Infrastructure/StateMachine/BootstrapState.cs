@@ -5,8 +5,9 @@ using CodeBase.Infrastructure.Services.Input;
 using CodeBase.Infrastructure.Services.PersistentProgress;
 using CodeBase.Infrastructure.Services.SaveLoad;
 using CodeBase.Logic;
-using CodeBase.Services.Input;
 using CodeBase.StaticData;
+using CodeBase.UI.Services.Factory;
+using CodeBase.UI.Services.Windows;
 using UnityEngine;
 
 namespace CodeBase.Infrastructure.StateMachine
@@ -54,6 +55,9 @@ namespace CodeBase.Infrastructure.StateMachine
             
             _allServices.RegisterSingle<ISaveLoadService>(new SaveLoadService(_allServices.Single<IPersistentProgressService>(), 
                 _allServices.Single<IGameFactory>()));
+            
+            _allServices.RegisterSingle<IUIFactory>(new UIFactory(_allServices.Single<IAssetProvider>(), _allServices.Single<IStaticDataService>()));
+            _allServices.RegisterSingle<IWindowService>(new WindowService(_allServices.Single<IUIFactory>()));
             
         }
 

@@ -1,5 +1,8 @@
 using UnityEngine;
 
-public class InitialPoint : MonoBehaviour
+namespace CodeBase.Infrastructure
 {
+    public class InitialPoint : MonoBehaviour
+    {
+    }
 }

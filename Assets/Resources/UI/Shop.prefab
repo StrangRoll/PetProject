@@ -1960,6 +1960,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Exit_button
       objectReference: {fileID: 0}
+    - target: {fileID: 3189750366342686573, guid: 206dc16af78dd9c4097a0238e4856c0f,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3613603754147078471, guid: 206dc16af78dd9c4097a0238e4856c0f,
         type: 3}
       propertyPath: m_Name
