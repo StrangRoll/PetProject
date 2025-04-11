@@ -48,17 +48,20 @@ namespace CodeBase.Infrastructure.StateMachine
             _allServices.RegisterSingle<IAssetProvider>(new AssetProvider());
             _allServices.RegisterSingle<IPersistentProgressService>(new PersistentProgressService());
             _allServices.RegisterSingle<IUncollectedLootChecker>(new UncollectedLootChecker());
-            
-            _allServices.RegisterSingle<IGameFactory>(
-                new  GameFactory(_allServices.Single<IAssetProvider>(), _allServices.Single<IStaticDataService>(),
-                    _allServices.Single<IPersistentProgressService>(), _allServices.Single<IUncollectedLootChecker>()));
-            
             _allServices.RegisterSingle<ISaveLoadService>(new SaveLoadService(_allServices.Single<IPersistentProgressService>(), 
                 _allServices.Single<IGameFactory>()));
             
-            _allServices.RegisterSingle<IUIFactory>(new UIFactory(_allServices.Single<IAssetProvider>(), _allServices.Single<IStaticDataService>()));
+            _allServices.RegisterSingle<IUIFactory>(new UIFactory(_allServices.Single<IAssetProvider>(), _allServices.Single<IStaticDataService>(),
+                _allServices.Single<IPersistentProgressService>()));
             _allServices.RegisterSingle<IWindowService>(new WindowService(_allServices.Single<IUIFactory>()));
             
+            _allServices.RegisterSingle<IGameFactory>(
+                new  GameFactory(
+                    _allServices.Single<IAssetProvider>(),
+                    _allServices.Single<IStaticDataService>(),
+                    _allServices.Single<IPersistentProgressService>(),
+                    _allServices.Single<IUncollectedLootChecker>(),
+                    _allServices.Single<IWindowService>()));
         }
 
         private void RegisterStaticData()

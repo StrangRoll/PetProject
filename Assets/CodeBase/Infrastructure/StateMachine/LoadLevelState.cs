@@ -4,8 +4,8 @@ using CodeBase.Infrastructure.Factory;
 using CodeBase.Infrastructure.Services;
 using CodeBase.Infrastructure.Services.PersistentProgress;
 using CodeBase.Logic;
-using CodeBase.UI;
 using CodeBase.UI.Elements;
+using CodeBase.UI.Services.Factory;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -20,10 +20,11 @@ namespace CodeBase.Infrastructure.StateMachine
         private readonly IPersistentProgressService _progressService;
         private readonly IUncollectedLootChecker _uncollectedLootChecker;
         private readonly IStaticDataService _staticData;
-        
+        private readonly IUIFactory _uiFactory;
+
         public LoadLevelState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, 
             LoadingCurtain loadingCurtain, IGameFactory gameFactory, IPersistentProgressService progressService, 
-            IUncollectedLootChecker uncollectedLootChecker, IStaticDataService staticData)
+            IUncollectedLootChecker uncollectedLootChecker, IStaticDataService staticData, IUIFactory uiFactory)
         {
             _gameStateMachine = gameStateMachine;
             _sceneLoader = sceneLoader;
@@ -32,6 +33,7 @@ namespace CodeBase.Infrastructure.StateMachine
             _progressService = progressService;
             _uncollectedLootChecker = uncollectedLootChecker;
             _staticData = staticData;
+            _uiFactory = uiFactory;
         }
 
         public void Enter(string sceneName)
@@ -51,10 +53,14 @@ namespace CodeBase.Infrastructure.StateMachine
 
         private void InitHud(GameObject hero)
         {
+            InitUIRoot();
             var hud = _gameFactory.CreateHud();
             
             hud.GetComponent<ActorUI>().Init(hero.GetComponent<HeroHealth>());
         }
+
+        private void InitUIRoot() => 
+            _uiFactory.CreateUIRoot();
 
         private void InformProgressReaders()
         {

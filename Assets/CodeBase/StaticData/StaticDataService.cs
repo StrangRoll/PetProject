@@ -11,7 +11,7 @@ namespace CodeBase.StaticData
     {
         private const string StaticDataMonstersPath = "StaticData/Monsters";
         private const string StaticDataLevelsPath = "StaticData/Levels";
-        private const string StaticDataWindowsPath = "StaticData/UI/WindowsStaticData";
+        private const string StaticDataWindowsPath = "StaticData/UI/WindowConfig";
         
         private Dictionary<MonsterTypeId,MonsterStaticData> _monsters;
         private Dictionary<string, LevelStaticData> _levels;
