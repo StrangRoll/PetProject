@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace CodeBase.UI
+namespace CodeBase.UI.Elements
 {
     [RequireComponent(typeof(Button))]
     public class ReSimpleButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
