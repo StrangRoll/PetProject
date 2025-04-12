@@ -1,4 +1,5 @@
 using System.Linq;
+using CodeBase.Infrastructure;
 using CodeBase.Logic;
 using CodeBase.Logic.EnemySpawners;
 using CodeBase.StaticData;
@@ -25,6 +26,7 @@ namespace CodeBase.Editor
                         .ToList();
 
                 levelData.LevelKey = SceneManager.GetActiveScene().name;
+                levelData.InitialHeroPoint = FindObjectOfType<InitialPoint>().transform.position;
             }
             
             EditorUtility.SetDirty(target);

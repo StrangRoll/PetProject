@@ -4,6 +4,7 @@ using CodeBase.Infrastructure.Factory;
 using CodeBase.Infrastructure.Services;
 using CodeBase.Infrastructure.Services.PersistentProgress;
 using CodeBase.Logic;
+using CodeBase.StaticData;
 using CodeBase.UI.Elements;
 using CodeBase.UI.Services.Factory;
 using UnityEngine;
@@ -72,11 +73,13 @@ namespace CodeBase.Infrastructure.StateMachine
 
         private void InitGameWorld()
         {
-            _uncollectedLootChecker.Init(_gameFactory);
-            InitSpawners();
+            var sceneKey = SceneManager.GetActiveScene().name;
+            var levelData = _staticData.ForLevel(sceneKey);
             
-            var initialPoint = Object.FindObjectOfType<InitialPoint>();
-            var hero = _gameFactory.CreateHero(initialPoint);
+            _uncollectedLootChecker.Init(_gameFactory);
+            
+            InitSpawners(levelData);
+            var hero = InitHero(levelData.InitialHeroPoint);
             
             InitHud(hero);
             InitUncollectedLoot();
@@ -84,11 +87,11 @@ namespace CodeBase.Infrastructure.StateMachine
             CameraFollow(hero.transform);
         }
 
-        private void InitSpawners()
-        {
-            var sceneKey = SceneManager.GetActiveScene().name;
-            var levelData = _staticData.ForLevel(sceneKey);
+        private GameObject InitHero(Vector3 initialPoint) => 
+             _gameFactory.CreateHero(initialPoint);
 
+        private void InitSpawners(LevelStaticData levelData)
+        {
             foreach (var spawner in levelData.EnemySpawners)
             {
                 _gameFactory.CreateSpawner(spawner.Position, spawner.Id, spawner.MonsterTypeId);

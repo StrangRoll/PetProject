@@ -12,7 +12,7 @@ namespace CodeBase.Infrastructure.Factory
     {
         List<ISavedProgressReader> ProgressReaders { get; }
         List<ISavedProgress> ProgressWriters { get; }
-        GameObject CreateHero(InitialPoint at);
+        GameObject CreateHero(Vector3 at);
         GameObject HeroGameObject { get; }
         GameObject CreateHud();
         void CreateSpawner(Vector3 position, string spawnerId, MonsterTypeId spawnerMonsterTypeId);
