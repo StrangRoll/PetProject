@@ -46,7 +46,7 @@ namespace CodeBase.Infrastructure.StateMachine
         private void OnLoaded()
         {
             InitGameWorld();
-            ReSimpleButtonInput.UpdateButtonsUpdateButtons();
+            ReSimpleButtonInput.UpdateButtons();
             InformProgressReaders();
             
             _gameStateMachine.Enter<GameLoopState>();
@@ -80,11 +80,19 @@ namespace CodeBase.Infrastructure.StateMachine
             
             InitSpawners(levelData);
             var hero = InitHero(levelData.InitialHeroPoint);
-            
+
+            InitLevelTransfer();
+
             InitHud(hero);
             InitUncollectedLoot();
             
             CameraFollow(hero.transform);
+        }
+
+        private void InitLevelTransfer()
+        {
+            var levelTransfer = Object.FindObjectOfType<LevelTransfer>();
+            if (levelTransfer != null) levelTransfer.Init(_gameStateMachine);
         }
 
         private GameObject InitHero(Vector3 initialPoint) => 

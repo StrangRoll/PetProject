@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using CodeBase.Hero;
 using CodeBase.Infrastructure.Services;
 using CodeBase.Infrastructure.Services.PersistentProgress;
-using CodeBase.Logic;
 using CodeBase.StaticData;
 using UnityEngine;
 

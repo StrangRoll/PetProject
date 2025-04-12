@@ -14,12 +14,12 @@ namespace CodeBase.Logic
 
     public void Show()
     {
-      gameObject.SetActive(true);
+      Curtain.gameObject.SetActive(true);
       Curtain.alpha = 1;
     }
     
     public void Hide() => StartCoroutine(DoFadeIn());
-    
+
     private IEnumerator DoFadeIn()
     {
       while (Curtain.alpha > 0)
@@ -28,7 +28,7 @@ namespace CodeBase.Logic
         yield return new WaitForSeconds(0.03f);
       }
       
-      gameObject.SetActive(false);
+      Curtain.gameObject.SetActive(false);
     }
   }
 }

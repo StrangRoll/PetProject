@@ -4,5 +4,6 @@ namespace CodeBase.Logic
     {
         public const string EnemySpawner = "EnemySpawner";
         public const string LootPiece = "LootPiece";
+        public const string Player = "Player";
     }
 }
