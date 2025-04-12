@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using CodeBase.Hero;
 using CodeBase.Infrastructure.Services;
 using CodeBase.Infrastructure.Services.PersistentProgress;
@@ -17,7 +18,7 @@ namespace CodeBase.Infrastructure.Factory
         void CreateSpawner(Vector3 position, string spawnerId, MonsterTypeId spawnerMonsterTypeId);
         void Register(ISavedProgressReader progressReader);
         void CleanUp();
-        GameObject CreateMonster(MonsterTypeId typeId, Transform parent);
+        Task<GameObject> CreateMonster(MonsterTypeId typeId, Transform parent);
         LootPiece CreateLoot();
     }
 }

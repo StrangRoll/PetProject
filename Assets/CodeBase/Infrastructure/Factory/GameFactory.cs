@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using CodeBase.Enemy;
 using CodeBase.Hero;
 using CodeBase.Infrastructure.AssetManagement;
@@ -7,10 +8,10 @@ using CodeBase.Infrastructure.Services.PersistentProgress;
 using CodeBase.Logic;
 using CodeBase.Logic.EnemySpawners;
 using CodeBase.StaticData;
-using CodeBase.UI;
 using CodeBase.UI.Elements;
 using CodeBase.UI.Services.Windows;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.AI;
 using Object = UnityEngine.Object;
 
@@ -70,11 +71,13 @@ namespace CodeBase.Infrastructure.Factory
             ProgressWriters.Clear();
         }
 
-        public GameObject CreateMonster(MonsterTypeId typeId, Transform parent)
+        public async Task<GameObject> CreateMonster(MonsterTypeId typeId, Transform parent)
         {
             var monsterData = _staticData.ForMonster(typeId);
-            var monster = Object.Instantiate(monsterData.Prefab, parent.position, Quaternion.identity, parent);
 
+            var prefab = await _assets.Load<GameObject>(monsterData.PrefabReference);
+            var monster = Object.Instantiate(prefab, parent.position, Quaternion.identity, parent);
+            
             var health = monster.GetComponent<IHealth>();
             health.Current = monsterData.Hp;
             health.Max = monsterData.Hp;
