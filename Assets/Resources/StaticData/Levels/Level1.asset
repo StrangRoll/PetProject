@@ -17,9 +17,10 @@ MonoBehaviour:
   - Id: Level_d17d85a5-2e5e-4b04-9ef4-bfa99939b8ad
     MonsterTypeId: 0
     Position: {x: -7.82, y: 1.1128161, z: -10.23}
-  - Id: Level_644b48ca-8495-45f4-90db-b021e191b5ea
-    MonsterTypeId: 0
-    Position: {x: -7.44, y: 1.1128161, z: -1.21}
   - Id: _2a8e4d89-d13e-40c2-814a-ff864e57bf24
     MonsterTypeId: 0
     Position: {x: -9.09, y: 0.59, z: -16.35}
+  - Id: Level_644b48ca-8495-45f4-90db-b021e191b5ea
+    MonsterTypeId: 0
+    Position: {x: -7.44, y: 1.1128161, z: -1.21}
+  InitialHeroPoint: {x: 10.31, y: 0.15609932, z: -15.09}
