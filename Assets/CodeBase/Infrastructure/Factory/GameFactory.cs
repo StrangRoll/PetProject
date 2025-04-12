@@ -11,7 +11,6 @@ using CodeBase.StaticData;
 using CodeBase.UI.Elements;
 using CodeBase.UI.Services.Windows;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
 using UnityEngine.AI;
 using Object = UnityEngine.Object;
 
@@ -69,6 +68,7 @@ namespace CodeBase.Infrastructure.Factory
         {
             ProgressReaders.Clear();
             ProgressWriters.Clear();
+            _assets.CleanUp();
         }
 
         public async Task<GameObject> CreateMonster(MonsterTypeId typeId, Transform parent)

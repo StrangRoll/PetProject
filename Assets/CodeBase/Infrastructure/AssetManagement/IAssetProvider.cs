@@ -9,5 +9,6 @@ namespace CodeBase.Infrastructure.AssetManagement
     {
         GameObject InstantiatePrefab(string path, Vector3 at = default);
         Task<T> Load<T>(AssetReferenceGameObject assetReference) where T : class;
+        void CleanUp();
     }
 }
